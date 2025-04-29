@@ -9,19 +9,22 @@ public class MyTestingClass {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + id;
-        for (int i = 0; i < name.length(); i++) {
-            hash = 31 * hash + name.charAt(i);
-        }
-        return hash;
+        int result = 17;
+        result = 31 * result + id;
+        result = 31 * result + (name == null ? 0 : name.length());
+        return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        MyTestingClass other = (MyTestingClass) obj;
+    public String toString() {
+        return "MyTestingClass{id=" + id + ", name='" + name + "'}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MyTestingClass)) return false;
+        MyTestingClass other = (MyTestingClass) o;
         return id == other.id && name.equals(other.name);
     }
 }
