@@ -1,18 +1,19 @@
-import java.util.Random;
-
 public class Main {
     public static void main(String[] args) {
-        MyHashTable<MyTestingClass, Student> table = new MyHashTable<>();
-        Random random = new Random();
+        MyHashTable<MyTestingClass, String> table = new MyHashTable<>();
 
         for (int i = 0; i < 10000; i++) {
-            MyTestingClass key = new MyTestingClass(random.nextInt(100000), "Name" + i);
-            Student value = new Student("Student" + i, random.nextInt(30) + 18);
-            table.put(key, value);
+            table.put(new MyTestingClass(i, "Test" + i), "value" + i);
         }
 
-        for (int i = 0; i < table.getCapacity(); i++) {
-            System.out.println("Bucket " + i + " size: " + table.getBucketSize(i));
+        for (int i = 0; i < 11; i++) {
+            int count = 0;
+            var node = table.chainArray[i];
+            while (node != null) {
+                count++;
+                node = node.next;
+            }
+            System.out.println("Bucket " + i + ": " + count + " elements");
         }
     }
 }
